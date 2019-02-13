@@ -1,22 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <SearchInput />
+      <DataTable />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SearchInput from './components/SearchInput.vue'
+import DataTable from './components/DataTable.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    SearchInput,
+    DataTable
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +28,24 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.preloader {
+  position: static;
+  display: block;
+  width: 100%;
+  img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    animation: preloader 2s infinite linear;
+  }
+}
+@keyframes preloader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
