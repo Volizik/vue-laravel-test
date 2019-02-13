@@ -20,15 +20,20 @@ const store = new Vuex.Store({
     alreadySearched: (state, payload) => state.alreadySearched = payload
   },
   actions: {
-    getFlatsList: async ({commit}) => {
+    getFlatsList: async ({commit}, payload) => {
       commit('alreadySearched', true);
       // TODO: fetch
-      return [
-        { Name: 'The Victoria', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
-        { Name: 'The Xavier', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
-        { Name: 'The Como', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
-        { Name: 'The Aspen', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 }
-      ]
+      // TODO: remove this code
+      if (payload !== '') {
+        return [
+          { Name: 'The Victoria', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
+          { Name: 'The Xavier', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
+          { Name: 'The Como', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
+          { Name: 'The Aspen', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 }
+        ]
+      } else {
+        return []
+      }
     }
   },
   getters: {

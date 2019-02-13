@@ -29,9 +29,8 @@
     },
     methods: {
       ...mapActions(['getFlatsList']),
-      ...mapMutations(['changeSearchingStatus', 'setFlatsList', 'alreadySearched']),
+      ...mapMutations(['changeSearchingStatus', 'setFlatsList']),
       search() {
-        this.alreadySearched(true);
         this.getFlatsList(this.value).then((res) => {
           this.setFlatsList(res);
           this.changeSearchingStatus(false);
