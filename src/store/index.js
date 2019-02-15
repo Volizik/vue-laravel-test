@@ -17,12 +17,12 @@ const store = new Vuex.Store({
   actions: {
     getFlatsList: async ({commit}) => { // Делаем запрос на получение квартир
       commit('changeSearchingStatus', true); // Указываем, что поиск в процессе
-      return Vue.$http.get('/api/get-all');
+      return Vue.http.get('/api/get-all');
     },
     updateFlatsList: async ({commit}, payload) => {
       commit('alreadySearched', true); // Указываем, что поиск уже производился
       commit('changeSearchingStatus', true); // Указываем, что поиск в процессе
-      return Vue.$http.get('/api/search', {params: payload});
+      return Vue.http.get('/api/search', {params: payload});
     }
   },
   getters: {
