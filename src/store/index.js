@@ -15,27 +15,14 @@ const store = new Vuex.Store({
     alreadySearched: (state, payload) => state.alreadySearched = payload  // Поиск уже производился
   },
   actions: {
-    getFlatsList: async ({commit}, payload) => { // Делаем запрос на получение квартир
+    getFlatsList: async ({commit}) => { // Делаем запрос на получение квартир
+      commit('changeSearchingStatus', true); // Указываем, что поиск в процессе
+      return Vue.$http.get('/api/get-all');
+    },
+    updateFlatsList: async ({commit}, payload) => {
       commit('alreadySearched', true); // Указываем, что поиск уже производился
       commit('changeSearchingStatus', true); // Указываем, что поиск в процессе
-      // TODO: create fetch
-
-      // TODO: remove this code below
-      return new Promise((resolve) => { // Имитация запроса к серверу
-        setTimeout(() => {
-          commit('changeSearchingStatus', false); // меняем флаг процесса поиска на false
-          if (payload.name !== '') {
-            resolve([
-              { Name: 'The Victoria', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
-              { Name: 'The Xavier', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
-              { Name: 'The Como', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 },
-              { Name: 'The Aspen', Price: 374662, Bedrooms: 4, Bathrooms: 3, Storeys: 2, Garages: 1 }
-            ]);
-          } else {
-            resolve([])
-          }
-        }, 2000);
-      });
+      return Vue.$http.get('/api/search', {params: payload});
     }
   },
   getters: {

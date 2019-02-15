@@ -60,19 +60,20 @@
       ...mapGetters(['searchingStatus'])
     },
     methods: {
-      ...mapActions(['getFlatsList']),
+      ...mapActions(['updateFlatsList']),
       ...mapMutations(['changeSearchingStatus', 'setFlatsList']),
       search() {
         const payload = { // Обьект для отправки
           name: this.name,
-          priceFrom: this.priceFrom,
-          priceTo: this.priceTo,
-          bedRooms: this.bedRooms,
-          bathRooms: this.bathRooms,
+          minPrice: this.priceFrom,
+          maxPrice: this.priceTo,
+          bedrooms: this.bedRooms,
+          bathrooms: this.bathRooms,
           storeys: this.storeys,
           garages: this.garages
         };
-        this.getFlatsList(payload).then((res) => { // Запрашиваем список квартир с сервера
+        this.updateFlatsList(payload).then((res) => { // Запрашиваем список квартир с сервера
+          this.changeSearchingStatus(false); // меняем флаг процесса поиска на false
           this.setFlatsList(res); // Записываем в стор полученый список квартир
         });
       }

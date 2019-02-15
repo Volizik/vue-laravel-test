@@ -10,12 +10,23 @@
 <script>
 import SearchInput from './components/SearchInput.vue'
 import DataTable from './components/DataTable.vue'
+import {mapActions, mapMutations} from 'vuex'
 
 export default {
   name: 'app',
   components: {
     SearchInput,
     DataTable
+  },
+  methods: {
+    ...mapActions(['getFlatsList']),
+    ...mapMutations(['changeSearchingStatus', 'setFlatsList']),
+  },
+  created() {
+    this.getFlatsList().then((res) => { // Запрашиваем список квартир с сервера
+      this.changeSearchingStatus(false); // меняем флаг процесса поиска на false
+      this.setFlatsList(res); // Записываем в стор полученый список квартир
+    });
   }
 }
 </script>
